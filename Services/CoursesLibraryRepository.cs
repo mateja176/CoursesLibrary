@@ -6,7 +6,7 @@ using CoursesLibrary.Entities;
 
 namespace CoursesLibrary.Services
 {
-  public class CoursesLibraryRepository : ICoursesLibraryRepository, IDisposable
+  public sealed class CoursesLibraryRepository : ICoursesLibraryRepository, IDisposable
   {
     private readonly CoursesLibraryContext _context;
 
@@ -151,7 +151,7 @@ namespace CoursesLibrary.Services
       GC.SuppressFinalize(this);
     }
 
-    protected virtual void Dispose(bool disposing)
+    private void Dispose(bool disposing)
     {
       if (disposing)
       {
