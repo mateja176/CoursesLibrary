@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CoursesLibrary.DbContexts;
 using CoursesLibrary.Entities;
+using CoursesLibrary.ResourceParameters;
 
 namespace CoursesLibrary.Services
 {
@@ -122,12 +123,13 @@ namespace CoursesLibrary.Services
             return _context.Authors.ToList<Author>();
         }
 
-        public IEnumerable<Author> GetAuthors(string mainCategory, string searchQuery)
+        public IEnumerable<Author> GetAuthors(AuthorsResourceParameters parameters)
         {
             return _context.Authors.Where(a =>
-                    (string.IsNullOrWhiteSpace(mainCategory) || a.MainCategory == mainCategory) &&
-                    ((string.IsNullOrWhiteSpace(searchQuery) || a.FirstName.Contains(searchQuery) ||
-                      a.LastName.Contains(searchQuery))))
+                    (string.IsNullOrWhiteSpace(parameters.MainCategory) || a.MainCategory == parameters.MainCategory) &&
+                    ((string.IsNullOrWhiteSpace(parameters.SearchQuery) ||
+                      a.FirstName.Contains(parameters.SearchQuery) ||
+                      a.LastName.Contains(parameters.SearchQuery))))
                 .ToList();
         }
 
