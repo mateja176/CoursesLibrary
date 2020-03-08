@@ -12,23 +12,24 @@ namespace CoursesLibrary.Controllers
   [Route("api/authors/{authorId}/courses")]
   public class CoursesController : ControllerBase
   {
-    private readonly ICoursesLibraryRepository _CoursesLibraryRepository;
+    private readonly ICoursesLibraryRepository _coursesLibraryRepository;
     private readonly IMapper _mapper;
 
-    public CoursesController(ICoursesLibraryRepository CoursesLibraryRepository, IMapper mapper)
+    public CoursesController(ICoursesLibraryRepository coursesLibraryRepository, IMapper mapper)
     {
-      _CoursesLibraryRepository = CoursesLibraryRepository;
+      _coursesLibraryRepository = coursesLibraryRepository;
       _mapper = mapper;
     }
 
+    [HttpGet()]
     public ActionResult<IEnumerable<CoursesDto>> GetCoursesForAuthor(Guid authorId)
     {
-      if (!_CoursesLibraryRepository.AuthorExists(authorId))
+      if (!_coursesLibraryRepository.AuthorExists(authorId))
       {
         return NotFound();
       }
 
-      var coursesForAuthor = _CoursesLibraryRepository.GetCourses(authorId);
+      var coursesForAuthor = _coursesLibraryRepository.GetCourses(authorId);
 
       var courses = _mapper.Map<IEnumerable<CoursesDto>>(coursesForAuthor);
 
@@ -38,12 +39,12 @@ namespace CoursesLibrary.Controllers
     [HttpGet("{courseId}")]
     public ActionResult<CoursesDto> GetCourseForAuthor(Guid authorId, Guid courseId)
     {
-      if (!_CoursesLibraryRepository.AuthorExists(authorId))
+      if (!_coursesLibraryRepository.AuthorExists(authorId))
       {
         return NotFound();
       }
 
-      var coursesForAuthorFromRepo = _CoursesLibraryRepository.GetCourse(authorId, courseId);
+      var coursesForAuthorFromRepo = _coursesLibraryRepository.GetCourse(authorId, courseId);
 
       if (coursesForAuthorFromRepo == null)
       {
