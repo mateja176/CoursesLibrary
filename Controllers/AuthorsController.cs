@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using DotnetWebAPIDemo.Models;
 using DotnetWebAPIDemo.Helpers;
 using CourseLibrary.API.Entities;
+using AutoMapper;
 
 namespace DotnetWebAPIDemo.Controllers
 {
@@ -14,22 +15,19 @@ namespace DotnetWebAPIDemo.Controllers
   public class AuthorsController : ControllerBase
   {
     private readonly ICourseLibraryRepository _courseLibraryRepository;
-    public AuthorsController(ICourseLibraryRepository courseLibraryRepository)
+    private readonly IMapper _mapper;
+    public AuthorsController(ICourseLibraryRepository courseLibraryRepository, IMapper mapper)
     {
       _courseLibraryRepository = courseLibraryRepository;
+
+      _mapper = mapper;
     }
     [HttpGet()]
     public ActionResult<IEnumerable<AuthorDto>> GetAuthors()
     {
       var authorsFromRepo = _courseLibraryRepository.GetAuthors();
 
-      var authors = authorsFromRepo.Select(authorFromRepo => new AuthorDto()
-      {
-        Id = authorFromRepo.Id,
-        Name = $"{authorFromRepo.FirstName} {authorFromRepo.LastName}",
-        MainCategory = authorFromRepo.MainCategory,
-        Age = authorFromRepo.DateOfBirth.GetCurrentAge()
-      });
+      var authors = _mapper.Map<IEnumerable<AuthorDto>>(authorsFromRepo);
 
       return new OkObjectResult(authors);
     }
