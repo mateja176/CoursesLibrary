@@ -5066,7 +5066,7 @@
       "outputPath": "/home/mateja/Documents/asp.net/CoursesLibrary/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/mateja/.config/NuGet/NuGet.Config"
+        "/home/mateja/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
