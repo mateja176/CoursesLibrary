@@ -18,7 +18,7 @@ namespace DotnetWebAPIDemo.Controllers
     {
       var authorsFromRepo = _courseLibraryRepository.GetAuthors();
 
-      return new JsonResult(authorsFromRepo);
+      return new OkObjectResult(authorsFromRepo);
     }
 
     [HttpGet("{authorId:guid}")]
@@ -26,7 +26,12 @@ namespace DotnetWebAPIDemo.Controllers
     {
       var authorFromRepo = _courseLibraryRepository.GetAuthor(authorId);
 
-      return new JsonResult(authorFromRepo);
+      if (authorFromRepo == null)
+      {
+        return NotFound();
+      }
+
+      return new OkObjectResult(authorFromRepo);
     }
   }
 }
