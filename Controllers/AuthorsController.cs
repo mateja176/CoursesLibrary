@@ -5,6 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using DotnetWebAPIDemo.Models;
 using DotnetWebAPIDemo.Helpers;
+using CourseLibrary.API.Entities;
 
 namespace DotnetWebAPIDemo.Controllers
 {
@@ -18,7 +19,7 @@ namespace DotnetWebAPIDemo.Controllers
       _courseLibraryRepository = courseLibraryRepository;
     }
     [HttpGet()]
-    public IActionResult GetAuthors()
+    public ActionResult<IEnumerable<AuthorDto>> GetAuthors()
     {
       var authorsFromRepo = _courseLibraryRepository.GetAuthors();
 
@@ -34,7 +35,7 @@ namespace DotnetWebAPIDemo.Controllers
     }
 
     [HttpGet("{authorId:guid}")]
-    public IActionResult GetAuthor(Guid authorId)
+    public ActionResult<Author> GetAuthor(Guid authorId)
     {
       var authorFromRepo = _courseLibraryRepository.GetAuthor(authorId);
 
