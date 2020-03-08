@@ -1,8 +1,8 @@
 using CourseLibrary.API.Entities;
-using DotnetWebAPIDemo.Models;
-using DotnetWebAPIDemo.Helpers;
+using CoursesLibrary.Models;
+using CoursesLibrary.Helpers;
 
-namespace DotnetWebAPIDemo.Profile
+namespace CoursesLibrary.Profile
 {
   public class AuthorsProfile : AutoMapper.Profile
   {

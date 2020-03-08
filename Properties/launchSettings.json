@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "DotnetWebAPIDemo": {
+    "CoursesLibrary": {
       "commandName": "Project",
       "launchBrowser": false,
       "launchUrl": "weatherforecast",

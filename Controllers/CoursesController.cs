@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using AutoMapper;
 using CourseLibrary.API.Services;
-using DotnetWebAPIDemo.Models;
+using CoursesLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DotnetWebAPIDemo.Controllers
+namespace CoursesLibrary.Controllers
 {
     [ApiController]
     [Route("api/authors/{authorId}/courses")]

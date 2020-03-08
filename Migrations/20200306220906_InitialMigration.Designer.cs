@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DotnetWebAPIDemo.Migrations
+namespace CoursesLibrary.Migrations
 {
     [DbContext(typeof(CourseLibraryContext))]
     [Migration("20200306220906_InitialMigration")]

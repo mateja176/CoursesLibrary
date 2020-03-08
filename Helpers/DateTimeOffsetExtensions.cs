@@ -1,6 +1,6 @@
 using System;
 
-namespace DotnetWebAPIDemo.Helpers
+namespace CoursesLibrary.Helpers
 {
   public static class DateTimeOffsetExtensions
   {

@@ -1,7 +1,7 @@
 using CourseLibrary.API.Entities;
-using DotnetWebAPIDemo.Models;
+using CoursesLibrary.Models;
 
-namespace DotnetWebAPIDemo.Profile
+namespace CoursesLibrary.Profile
 {
     public class CoursesProfile : AutoMapper.Profile
     {

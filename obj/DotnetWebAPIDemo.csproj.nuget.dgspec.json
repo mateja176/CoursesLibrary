@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/mateja/Documents/asp.net/DotnetWebAPIDemo/DotnetWebAPIDemo.csproj": {}
+    "/home/mateja/Documents/asp.net/CoursesLibrary/CoursesLibrary.csproj": {}
   },
   "projects": {
-    "/home/mateja/Documents/asp.net/DotnetWebAPIDemo/DotnetWebAPIDemo.csproj": {
+    "/home/mateja/Documents/asp.net/CoursesLibrary/CoursesLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/mateja/Documents/asp.net/DotnetWebAPIDemo/DotnetWebAPIDemo.csproj",
-        "projectName": "DotnetWebAPIDemo",
-        "projectPath": "/home/mateja/Documents/asp.net/DotnetWebAPIDemo/DotnetWebAPIDemo.csproj",
+        "projectUniqueName": "/home/mateja/Documents/asp.net/CoursesLibrary/CoursesLibrary.csproj",
+        "projectName": "CoursesLibrary",
+        "projectPath": "/home/mateja/Documents/asp.net/CoursesLibrary/CoursesLibrary.csproj",
         "packagesPath": "/home/mateja/.nuget/packages/",
-        "outputPath": "/home/mateja/Documents/asp.net/DotnetWebAPIDemo/obj/",
+        "outputPath": "/home/mateja/Documents/asp.net/CoursesLibrary/obj/",
         "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/home/mateja/.nuget/NuGet/NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "netcoreapp3.1"
-        ],
+        "configFilePaths": ["/home/mateja/.config/NuGet/NuGet.Config"],
+        "originalTargetFrameworks": ["netcoreapp3.1"],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -28,9 +24,7 @@
           }
         },
         "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
+          "warnAsError": ["NU1605"]
         }
       },
       "frameworks": {
@@ -59,14 +53,7 @@
               "version": "[3.1.2, )"
             }
           },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
+          "imports": ["net461", "net462", "net47", "net471", "net472", "net48"],
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {

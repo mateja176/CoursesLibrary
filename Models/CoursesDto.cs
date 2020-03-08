@@ -1,6 +1,6 @@
 using System;
 
-namespace DotnetWebAPIDemo.Models
+namespace CoursesLibrary.Models
 {
     public class CoursesDto
     {

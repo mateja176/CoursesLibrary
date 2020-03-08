@@ -3,12 +3,12 @@ using CourseLibrary.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Collections.Generic;
-using DotnetWebAPIDemo.Models;
-using DotnetWebAPIDemo.Helpers;
+using CoursesLibrary.Helpers;
 using CourseLibrary.API.Entities;
 using AutoMapper;
+using CoursesLibrary.Models;
 
-namespace DotnetWebAPIDemo.Controllers
+namespace CoursesLibrary.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]

@@ -1,6 +1,6 @@
 using System;
 
-namespace DotnetWebAPIDemo
+namespace CoursesLibrary
 {
     public class WeatherForecast
     {
