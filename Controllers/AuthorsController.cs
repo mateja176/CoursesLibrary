@@ -1,6 +1,10 @@
 using System;
 using CourseLibrary.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Collections.Generic;
+using DotnetWebAPIDemo.Models;
+using DotnetWebAPIDemo.Helpers;
 
 namespace DotnetWebAPIDemo.Controllers
 {
@@ -18,7 +22,15 @@ namespace DotnetWebAPIDemo.Controllers
     {
       var authorsFromRepo = _courseLibraryRepository.GetAuthors();
 
-      return new OkObjectResult(authorsFromRepo);
+      var authors = authorsFromRepo.Select(authorFromRepo => new AuthorDto()
+      {
+        Id = authorFromRepo.Id,
+        Name = $"{authorFromRepo.FirstName} {authorFromRepo.LastName}",
+        MainCategory = authorFromRepo.MainCategory,
+        Age = authorFromRepo.DateOfBirth.GetCurrentAge()
+      });
+
+      return new OkObjectResult(authors);
     }
 
     [HttpGet("{authorId:guid}")]
