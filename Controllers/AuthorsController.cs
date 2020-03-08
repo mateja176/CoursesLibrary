@@ -42,7 +42,7 @@ namespace DotnetWebAPIDemo.Controllers
         return NotFound();
       }
 
-      return new OkObjectResult(authorFromRepo);
+      return new OkObjectResult(_mapper.Map<AuthorDto>(authorFromRepo));
     }
   }
 }
