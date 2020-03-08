@@ -14,18 +14,18 @@ namespace CoursesLibrary.Controllers
   [Route("api/[controller]")]
   public class AuthorsController : ControllerBase
   {
-    private readonly ICoursesLibraryRepository _CoursesLibraryRepository;
+    private readonly ICoursesLibraryRepository _coursesLibraryRepository;
     private readonly IMapper _mapper;
-    public AuthorsController(ICoursesLibraryRepository CoursesLibraryRepository, IMapper mapper)
+    public AuthorsController(ICoursesLibraryRepository coursesLibraryRepository, IMapper mapper)
     {
-      _CoursesLibraryRepository = CoursesLibraryRepository;
+      _coursesLibraryRepository = coursesLibraryRepository;
 
       _mapper = mapper;
     }
     [HttpGet()]
     public ActionResult<IEnumerable<AuthorDto>> GetAuthors()
     {
-      var authorsFromRepo = _CoursesLibraryRepository.GetAuthors();
+      var authorsFromRepo = _coursesLibraryRepository.GetAuthors();
 
       var authors = _mapper.Map<IEnumerable<AuthorDto>>(authorsFromRepo);
 
@@ -35,7 +35,7 @@ namespace CoursesLibrary.Controllers
     [HttpGet("{authorId:guid}")]
     public ActionResult<Author> GetAuthor(Guid authorId)
     {
-      var authorFromRepo = _CoursesLibraryRepository.GetAuthor(authorId);
+      var authorFromRepo = _coursesLibraryRepository.GetAuthor(authorId);
 
       if (authorFromRepo == null)
       {
