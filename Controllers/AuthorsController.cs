@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using CoursesLibrary.Helpers;
 using AutoMapper;
+using CoursesLibrary.DbContexts;
 using CoursesLibrary.Entities;
 using CoursesLibrary.Models;
 using CoursesLibrary.Services;
@@ -23,9 +24,10 @@ namespace CoursesLibrary.Controllers
       _mapper = mapper;
     }
     [HttpGet()]
-    public ActionResult<IEnumerable<AuthorDto>> GetAuthors()
+    [HttpHead]
+    public ActionResult<IEnumerable<AuthorDto>> GetAuthors(string mainCategory)
     {
-      var authorsFromRepo = _coursesLibraryRepository.GetAuthors();
+      var authorsFromRepo = _coursesLibraryRepository.GetAuthors(mainCategory);
 
       var authors = _mapper.Map<IEnumerable<AuthorDto>>(authorsFromRepo);
 

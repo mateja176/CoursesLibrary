@@ -122,6 +122,22 @@ namespace CoursesLibrary.Services
       return _context.Authors.ToList<Author>();
     }
 
+    public IEnumerable<Author> GetAuthors(string mainCategory)
+    {
+      if (string.IsNullOrWhiteSpace(mainCategory))
+      {
+        return GetAuthors();
+      }
+      else
+      {
+        var mc = mainCategory.Trim();
+
+        var authors = _context.Authors.Where(a => a.MainCategory == mc).ToList();
+
+        return authors;
+      }
+    }
+
     public IEnumerable<Author> GetAuthors(IEnumerable<Guid> authorIds)
     {
       if (authorIds == null)
