@@ -1,9 +1,11 @@
+using System;
 using CourseLibrary.API.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotnetWebAPIDemo.Controllers
 {
   [ApiController]
+  [Route("api/[controller]")]
   public class AuthorsController : ControllerBase
   {
     private readonly ICourseLibraryRepository _courseLibraryRepository;
@@ -11,12 +13,20 @@ namespace DotnetWebAPIDemo.Controllers
     {
       _courseLibraryRepository = courseLibraryRepository;
     }
-    [HttpGet("api/authors")]
+    [HttpGet()]
     public IActionResult GetAuthors()
     {
       var authorsFromRepo = _courseLibraryRepository.GetAuthors();
 
       return new JsonResult(authorsFromRepo);
+    }
+
+    [HttpGet("{authorId:guid}")]
+    public IActionResult GetAuthor(Guid authorId)
+    {
+      var authorFromRepo = _courseLibraryRepository.GetAuthor(authorId);
+
+      return new JsonResult(authorFromRepo);
     }
   }
 }
