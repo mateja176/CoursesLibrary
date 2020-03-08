@@ -1,12 +1,12 @@
 using System;
-using CourseLibrary.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Collections.Generic;
 using CoursesLibrary.Helpers;
-using CourseLibrary.API.Entities;
 using AutoMapper;
+using CoursesLibrary.Entities;
 using CoursesLibrary.Models;
+using CoursesLibrary.Services;
 
 namespace CoursesLibrary.Controllers
 {
@@ -14,18 +14,18 @@ namespace CoursesLibrary.Controllers
   [Route("api/[controller]")]
   public class AuthorsController : ControllerBase
   {
-    private readonly ICourseLibraryRepository _courseLibraryRepository;
+    private readonly ICoursesLibraryRepository _CoursesLibraryRepository;
     private readonly IMapper _mapper;
-    public AuthorsController(ICourseLibraryRepository courseLibraryRepository, IMapper mapper)
+    public AuthorsController(ICoursesLibraryRepository CoursesLibraryRepository, IMapper mapper)
     {
-      _courseLibraryRepository = courseLibraryRepository;
+      _CoursesLibraryRepository = CoursesLibraryRepository;
 
       _mapper = mapper;
     }
     [HttpGet()]
     public ActionResult<IEnumerable<AuthorDto>> GetAuthors()
     {
-      var authorsFromRepo = _courseLibraryRepository.GetAuthors();
+      var authorsFromRepo = _CoursesLibraryRepository.GetAuthors();
 
       var authors = _mapper.Map<IEnumerable<AuthorDto>>(authorsFromRepo);
 
@@ -35,7 +35,7 @@ namespace CoursesLibrary.Controllers
     [HttpGet("{authorId:guid}")]
     public ActionResult<Author> GetAuthor(Guid authorId)
     {
-      var authorFromRepo = _courseLibraryRepository.GetAuthor(authorId);
+      var authorFromRepo = _CoursesLibraryRepository.GetAuthor(authorId);
 
       if (authorFromRepo == null)
       {

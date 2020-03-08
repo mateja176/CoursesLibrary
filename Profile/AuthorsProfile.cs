@@ -1,4 +1,4 @@
-using CourseLibrary.API.Entities;
+using CoursesLibrary.Entities;
 using CoursesLibrary.Models;
 using CoursesLibrary.Helpers;
 
