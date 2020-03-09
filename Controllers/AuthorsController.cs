@@ -34,7 +34,7 @@ namespace CoursesLibrary.Controllers
 
             var authors = _mapper.Map<IEnumerable<AuthorDto>>(authorsFromRepo);
 
-            return new OkObjectResult(authors);
+            return Ok(authors);
         }
 
         [HttpGet("{authorId:guid}", Name = "GetAuthor")]
@@ -47,7 +47,7 @@ namespace CoursesLibrary.Controllers
                 return NotFound();
             }
 
-            return new OkObjectResult(_mapper.Map<AuthorDto>(authorFromRepo));
+            return Ok(_mapper.Map<AuthorDto>(authorFromRepo));
         }
 
         [HttpPost]
