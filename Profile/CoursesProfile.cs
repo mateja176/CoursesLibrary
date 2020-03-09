@@ -8,6 +8,8 @@ namespace CoursesLibrary.Profile
         public CoursesProfile()
         {
             CreateMap<Course, CoursesDto>();
+            
+            CreateMap<CourseForCreationDto, Course>();
         }
     }
 }
