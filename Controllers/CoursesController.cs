@@ -76,7 +76,7 @@ namespace CoursesLibrary.Controllers
         }
 
         [HttpPut("{courseId}")]
-        public ActionResult SetCourseForAuthor(Guid authorId, Guid courseId, CourseForSettingDto courseDto)
+        public IActionResult SetCourseForAuthor(Guid authorId, Guid courseId, CourseForSettingDto courseDto)
         {
             if (!_coursesLibraryRepository.AuthorExists((authorId)))
             {
@@ -87,7 +87,18 @@ namespace CoursesLibrary.Controllers
 
             if (courseFromRepo == null)
             {
-                return NotFound();
+                var courseToAdd = _mapper.Map<Course>(courseDto);
+
+                courseToAdd.Id = courseId;
+
+                _coursesLibraryRepository.AddCourse(authorId, courseToAdd);
+
+                _coursesLibraryRepository.Save();
+
+                var courseToReturn = _mapper.Map<CoursesDto>(courseToAdd);
+
+                return CreatedAtRoute("GetCourseForAuthor", new {authorId, courseId},
+                    courseToReturn);
             }
 
             _coursesLibraryRepository.UpdateCourse(_mapper.Map(courseDto, courseFromRepo));
