@@ -10,6 +10,8 @@ namespace CoursesLibrary.Profile
             CreateMap<Course, CoursesDto>();
             
             CreateMap<CourseForCreationDto, Course>();
+            
+            CreateMap<CourseForSettingDto, Course>();
         }
     }
 }

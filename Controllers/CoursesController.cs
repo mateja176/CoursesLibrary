@@ -5,6 +5,7 @@ using AutoMapper;
 using CoursesLibrary.Entities;
 using CoursesLibrary.Models;
 using CoursesLibrary.Services;
+using CoursesLibrary.ValidationAttributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoursesLibrary.Controllers
@@ -72,6 +73,28 @@ namespace CoursesLibrary.Controllers
             var courseDto = _mapper.Map<CoursesDto>(courseEntity);
 
             return CreatedAtRoute("GetCourseForAuthor", new {authorId = authorId, courseId = courseDto.Id}, courseDto);
+        }
+
+        [HttpPut("{courseId}")]
+        public ActionResult SetCourseForAuthor(Guid authorId, Guid courseId, CourseForSettingDto courseDto)
+        {
+            if (!_coursesLibraryRepository.AuthorExists((authorId)))
+            {
+                return NotFound();
+            }
+
+            var courseFromRepo = _coursesLibraryRepository.GetCourse(authorId, courseId);
+
+            if (courseFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _coursesLibraryRepository.UpdateCourse(_mapper.Map(courseDto, courseFromRepo));
+
+            _coursesLibraryRepository.Save();
+
+            return NoContent();
         }
     }
 }
