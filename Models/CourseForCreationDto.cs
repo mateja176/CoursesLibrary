@@ -8,7 +8,10 @@ namespace CoursesLibrary.Models
     [CourseTitleMustBeDifferentFromDescription]
     public class CourseForCreationDto
     {
-        [Required] [MaxLength(100)] public string Title { get; set; }
+        [Required(ErrorMessage = "A course title is required.")]
+        [MaxLength(100)]
+        public string Title { get; set; }
+
         [MaxLength(1500)] public string Description { get; set; }
 
         // public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
