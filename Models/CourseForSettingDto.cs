@@ -1,8 +1,14 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace CoursesLibrary.Models
 {
-    public class CourseForSettingDto
+    public class CourseForSettingDto : CourseForManipulation
     {
-        public string Title { get; set; }
-        public string Description { get; set; }
+        [Required]
+        public override string Description
+        {
+            get => base.Description;
+            set => base.Description = value;
+        }
     }
 }
