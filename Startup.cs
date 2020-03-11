@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Serialization;
 
 namespace CoursesLibrary
 {
@@ -26,7 +27,12 @@ namespace CoursesLibrary
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers(setupAction => { setupAction.ReturnHttpNotAcceptable = true; })
-                .AddXmlDataContractSerializerFormatters().ConfigureApiBehaviorOptions(setupAction =>
+                .AddNewtonsoftJson(setupAction =>
+                {
+                    setupAction.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                })
+                .AddXmlDataContractSerializerFormatters()
+                .ConfigureApiBehaviorOptions(setupAction =>
                 {
                     setupAction.InvalidModelStateResponseFactory = context =>
                     {

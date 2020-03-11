@@ -6,6 +6,7 @@ using CoursesLibrary.Entities;
 using CoursesLibrary.Models;
 using CoursesLibrary.Services;
 using CoursesLibrary.ValidationAttributes;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoursesLibrary.Controllers
@@ -102,6 +103,34 @@ namespace CoursesLibrary.Controllers
             }
 
             _coursesLibraryRepository.UpdateCourse(_mapper.Map(courseDto, courseFromRepo));
+
+            _coursesLibraryRepository.Save();
+
+            return NoContent();
+        }
+
+        [HttpPatch("{courseId}")]
+        public ActionResult UpdateCourseForAuthor(Guid authorId, Guid courseId, JsonPatchDocument<CourseForSettingDto> partialCourse)
+        {
+            if (!_coursesLibraryRepository.AuthorExists(authorId))
+            {
+                return NotFound();
+            }
+
+            var courseFromRepo = _coursesLibraryRepository.GetCourse(authorId, courseId);
+
+            if (courseFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            var courseToPatch = _mapper.Map<CourseForSettingDto>(courseFromRepo);
+
+            partialCourse.ApplyTo(courseToPatch);
+
+            _mapper.Map(courseToPatch, courseFromRepo);
+            
+            _coursesLibraryRepository.UpdateCourse(courseFromRepo);
 
             _coursesLibraryRepository.Save();
 
