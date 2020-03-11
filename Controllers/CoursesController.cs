@@ -126,7 +126,12 @@ namespace CoursesLibrary.Controllers
 
             var courseToPatch = _mapper.Map<CourseForSettingDto>(courseFromRepo);
 
-            partialCourse.ApplyTo(courseToPatch);
+            partialCourse.ApplyTo(courseToPatch, ModelState);
+
+            if (!TryValidateModel(courseToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
 
             _mapper.Map(courseToPatch, courseFromRepo);
             
