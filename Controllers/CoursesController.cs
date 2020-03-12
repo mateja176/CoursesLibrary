@@ -8,6 +8,10 @@ using CoursesLibrary.Services;
 using CoursesLibrary.ValidationAttributes;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace CoursesLibrary.Controllers
 {
@@ -110,7 +114,8 @@ namespace CoursesLibrary.Controllers
         }
 
         [HttpPatch("{courseId}")]
-        public ActionResult UpdateCourseForAuthor(Guid authorId, Guid courseId, JsonPatchDocument<CourseForSettingDto> partialCourse)
+        public ActionResult UpdateCourseForAuthor(Guid authorId, Guid courseId,
+            JsonPatchDocument<CourseForSettingDto> partialCourse)
         {
             if (!_coursesLibraryRepository.AuthorExists(authorId))
             {
@@ -134,12 +139,20 @@ namespace CoursesLibrary.Controllers
             }
 
             _mapper.Map(courseToPatch, courseFromRepo);
-            
+
             _coursesLibraryRepository.UpdateCourse(courseFromRepo);
 
             _coursesLibraryRepository.Save();
 
             return NoContent();
         }
+
+        // public override ActionResult ValidationProblem(
+        //     [ActionResultObjectValue] ModelStateDictionary modelStateDictionary)
+        // {
+        //     var options = HttpContext.RequestServices.GetRequiredService<IOptions<ApiBehaviorOptions>>();
+        //
+        //     return (ActionResult) options.Value.InvalidModelStateRepositoryFactory(ControllerContext);
+        // }
     }
 }
